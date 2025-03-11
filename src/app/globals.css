@@ -1,0 +1,939 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Global border reset - REMOVED overly aggressive reset */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary color in HSL format */
+  --primary-50: 210 100% 98%;
+  --primary-100: 210 100% 95%;
+  --primary-200: 210 95% 90%;
+  --primary-300: 210 90% 80%;
+  --primary-400: 210 85% 70%;
+  --primary-500: 210 80% 60%;
+  --primary-600: 210 75% 50%;
+  --primary-700: 210 70% 40%;
+  --primary-800: 210 65% 30%;
+  --primary-900: 210 60% 20%;
+  --primary-950: 210 55% 10%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Other theme colors */
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --secondary-light: #E6F4EA;
+  --neutral-50: #f8f9fc;
+  --neutral-100: #E8EAED;
+  --neutral-300: #9AA0A6;
+  --neutral-700: #3C4043;
+  --neutral-900: #2d3748;
+  --white: #FFFFFF;
+  --error: #EA4335;
+  --success: #34A853;
+  --header-gradient: linear-gradient(135deg, rgba(66, 133, 244, 0.98), rgba(45, 55, 72, 0.98));
+  --header-overlay: rgba(0, 0, 0, 0.25);
+  
+  /* Enhanced Borders & Shadows */
+  --border-light: 1px solid rgba(60, 64, 67, 0.15);
+  --border-standard: 2px solid rgba(60, 64, 67, 0.15);
+  --border-primary: 2px solid rgba(66, 133, 244, 0.3);
+  --border-focus: 2px solid rgba(66, 133, 244, 0.8);
+  --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.16);
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Spacing */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Keep other existing variables */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-neutral-900 mb-4;
+  }
+
+  h1 { @apply text-4xl font-bold md:text-5xl; }
+  h2 { @apply text-3xl font-bold md:text-4xl; }
+  h3 { @apply text-2xl font-bold md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl leading-relaxed; }
+
+  p { @apply text-neutral-700 mb-4; }
+
+  /* Form elements */
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    border: var(--border-primary) !important;
+    border-radius: var(--radius-sm) !important;
+    @apply px-4 py-2 w-full transition-all duration-200 bg-white;
+    height: 50px;
+    font-size: 1.1rem;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border: var(--border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.25) !important;
+    outline: none !important;
+  }
+
+  /* Override focus styles for search input */
+  .search-location-input {
+    border: none !important;
+  }
+
+  .search-location-input:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-md border border-blue-700 bg-transparent px-4 py-2 text-sm font-medium text-blue-700 shadow-sm transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .input {
+    @apply block w-full rounded-md border-gray-200 px-4 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0.25rem 0.75rem !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    background-color: #EBF5FF !important;
+    color: #1D4ED8 !important;
+  }
+
+  .card {
+    @apply rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md;
+  }
+
+  .section {
+    @apply py-12 md:py-16 bg-white;
+  }
+
+  /* Remove problematic logo styles */
+  .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    text-decoration: none !important;
+    padding: 0 !important;
+  }
+
+  /* Logo styles */
+  .logo,
+  .nav-logo,
+  a:has(> img[alt*="NotaryFinder"]) {
+    @apply flex items-center gap-3 no-underline;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-icon-container {
+    background-color: #4285F4 !important;
+    padding: 0.25rem !important;
+    border-radius: 0.375rem !important;
+  }
+
+  .logo img,
+  .nav-logo img {
+    height: 1.5rem !important;
+    width: auto !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .logo span,
+  .nav-logo span,
+  a:has(> img[alt*="NotaryFinder"]) span {
+    color: #111827 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+  }
+
+  /* Navigation container */
+  header nav {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between;
+    background: white !important;
+  }
+
+  /* Update header styles */
+  .site-header,
+  header {
+    background-color: white !important;
+    border-bottom: 1px solid #E5E7EB !important;
+    padding: 0.35rem 0 !important;
+    position: relative !important;
+    box-shadow: none !important;
+  }
+
+  /* Navigation links */
+  .nav-links {
+    @apply flex items-center gap-8;
+  }
+
+  .nav-link,
+  .nav-links a:not([href="/notary-signup"]):not([href="/claim-listing"]),
+  header a:not(.logo):not(.btn):not([href="/notary-signup"]):not([href="/claim-listing"]) {
+    color: #111827 !important;
+    font-weight: 500 !important;
+    padding: 0 !important;
+    transition: color 0.2s ease !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+    background: none !important;
+    border: none !important;
+    font-family: var(--font-family) !important;
+  }
+
+  .nav-link:hover,
+  .nav-links a:not([href="/notary-signup"]):not([href="/claim-listing"]):hover,
+  header a:not(.logo):not(.btn):not([href="/notary-signup"]):not([href="/claim-listing"]):hover {
+    color: #4B5563 !important;
+    background: none !important;
+  }
+
+  /* Button styles for Sign Up and Claim Listing */
+  header a[href="/notary-signup"],
+  header a[href="/claim-listing"] {
+    background-color: #4285F4 !important;
+    color: white !important;
+    padding: 0.375rem 1rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.2s ease !important;
+    margin-left: 1.5rem !important;
+  }
+
+  header a[href="/notary-signup"]:hover,
+  header a[href="/claim-listing"]:hover {
+    background-color: #3b78e7 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Dark mode toggle */
+  header button[aria-label="Toggle theme"] {
+    color: white !important;
+    opacity: 0.9 !important;
+    padding: 0.5rem !important;
+    background: transparent !important;
+    border: none !important;
+    margin-left: 0.75rem !important;
+    border-radius: 0.375rem !important;
+    transition: all 0.2s ease !important;
+  }
+
+  header button[aria-label="Toggle theme"]:hover {
+    opacity: 1 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* FAQ styling */
+  .faq-item,
+  details,
+  [role="button"][aria-expanded] {
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border-radius: 8px !important;
+    position: relative !important;
+    background-color: white !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Remove one of the carets */
+  .faq-item::before,
+  details::before,
+  [role="button"][aria-expanded]::before {
+    display: none !important; /* Remove the generated caret */
+  }
+
+  /* If you're adding carets via ::before, remove any that might be in the HTML */
+  .faq-question svg:first-child,
+  summary svg:first-child,
+  [role="button"][aria-expanded] svg:first-child,
+  .faq-question i:first-child,
+  summary i:first-child,
+  [role="button"][aria-expanded] i:first-child,
+  .faq-item > svg,
+  details > svg,
+  [role="button"][aria-expanded] > svg {
+    display: none !important;
+  }
+
+  /* Alternative approach: Keep only first caret and hide the rest */
+  .faq-question *:nth-child(n+2):has(path),
+  summary *:nth-child(n+2):has(path),
+  [role="button"][aria-expanded] *:nth-child(n+2):has(path) {
+    display: none !important;
+  }
+
+  /* FAQ caret styling */
+  .faq-question,
+  summary,
+  [role="button"][aria-expanded] {
+    padding: 16px 16px 16px 40px !important;
+    position: relative !important;
+    cursor: pointer !important;
+    background-color: white !important;
+    font-weight: 500 !important;
+  }
+
+  .faq-question::before,
+  summary::before,
+  [role="button"][aria-expanded]::before {
+    content: "▶" !important;
+    position: absolute !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--primary) !important;
+    font-size: 12px !important;
+    display: block !important;
+  }
+
+  details[open] summary::before,
+  [role="button"][aria-expanded="true"]::before {
+    content: "▼" !important;
+  }
+
+  .faq-answer,
+  details[open] > *:not(summary),
+  [role="region"][aria-labelledby] {
+    padding: 16px !important;
+    background-color: white !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Enhanced header styles */
+  .site-header::after,
+  header::after {
+    content: none; /* Remove overlay */
+  }
+
+  /* Enhanced navigation */
+  .nav {
+    @apply flex justify-between items-center px-6;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-logo,
+  .logo,
+  a:has(> img[alt*="NotaryFinder"]) {
+    @apply flex items-center gap-3 no-underline;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo img,
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  .logo-text,
+  .nav-logo span,
+  a:has(> img[alt*="NotaryFinder"]) span {
+    color: #111827 !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+  }
+
+  /* Navigation links */
+  .nav-links {
+    @apply flex items-center gap-6;
+  }
+
+  .nav-link,
+  .nav-links a,
+  header a:not(.logo):not(.btn):not([href="/notary-signup"]) {
+    color: #111827 !important;
+    font-weight: 500 !important;
+    padding: 0.5rem !important;
+    transition: all 0.2s ease !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+  }
+
+  .nav-link:hover,
+  .nav-links a:hover,
+  header a:not(.logo):not(.btn):not([href="/notary-signup"]):hover {
+    color: #4B5563 !important;
+  }
+
+  /* Sign up button */
+  header a[href="/notary-signup"],
+  header .btn-primary {
+    @apply bg-white text-blue-600 px-6 py-2.5 rounded-lg font-medium hover:bg-opacity-90 transition-all;
+    border: none !important;
+    text-shadow: none !important;
+    margin-left: 1rem !important;
+  }
+
+  /* Dark mode toggle */
+  header button[aria-label="Toggle theme"] {
+    @apply text-white opacity-90 hover:opacity-100 transition-opacity;
+    background: transparent !important;
+    border: none !important;
+    margin-left: 0.5rem !important;
+  }
+
+  /* Enhanced city cards */
+  .popular-cities {
+    @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+    margin: 32px 0;
+    padding: 0 16px;
+  }
+
+  /* City cards with background color instead of borders */
+  .city-card,
+  .popular-cities a,
+  a[href^="/"][href*="/"],
+  div:has(> h2:contains("Popular Cities")) a,
+  [data-testid="city-link"] {
+    background-color: #f8f9ff !important; /* Light blue background */
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 8px !important;
+    transition: all 0.2s ease !important;
+    display: block !important;
+    text-align: center !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Hover effect */
+  .city-card:hover,
+  .popular-cities a:hover,
+  div:has(> h2:contains("Popular Cities")) a:hover,
+  [data-testid="city-link"]:hover {
+    background-color: #e8f0fe !important; /* Slightly darker blue on hover */
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* City name styling */
+  .city-name,
+  .popular-cities a strong,
+  div:has(> h2:contains("Popular Cities")) a strong,
+  [data-testid="city-link"] strong {
+    font-weight: 600 !important;
+    color: #2d3748 !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+
+  .city-count {
+    @apply text-sm text-neutral-700;
+  }
+
+  /* Enhanced star ratings */
+  .star-rating {
+    @apply flex items-center gap-1;
+    margin: 8px 0;
+  }
+
+  .star {
+    @apply text-accent;
+    font-size: 20px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+  }
+
+  .star-empty {
+    @apply text-neutral-100;
+    font-size: 20px;
+  }
+
+  .rating-count {
+    @apply ml-2 text-sm text-neutral-700;
+    margin-top: 1px;
+  }
+
+  /* Featured notary section enhancements */
+  .featured-notaries-section,
+  section:has(> h2:contains("Featured Notaries")) {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin: 32px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-notaries-section::before,
+  section:has(> h2:contains("Featured Notaries"))::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+  }
+
+  .featured-notaries-section h2,
+  section:has(> h2:contains("Featured Notaries")) h2 {
+    color: var(--neutral-900);
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 8px;
+    display: inline-block;
+  }
+
+  /* Enhanced search container */
+  .search-container {
+    @apply max-w-3xl w-full mx-auto;
+  }
+
+  .search-container > div:first-child {
+    background-color: white;
+    border-radius: var(--radius-lg) !important;
+    padding: 28px !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+    margin: 32px 0;
+    border: var(--border-light) !important;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .search-input {
+    height: 50px;
+    font-size: 1.1rem;
+    padding-left: 16px;
+    border: var(--border-primary) !important;
+    transition: border-color 0.2s ease;
+  }
+
+  .search-input:focus {
+    border: var(--border-focus) !important;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.25) !important;
+  }
+
+  /* Enhanced card styles */
+  .featured-notary,
+  [data-testid="notary-card"],
+  .notary-card,
+  .card {
+    @apply bg-white p-6 mb-6 transition-all duration-200;
+    border: var(--border-light) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-md) !important;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .featured-notary::before,
+  [data-testid="notary-card"]::before,
+  .notary-card::before {
+    content: "";
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .featured-notary:hover,
+  [data-testid="notary-card"]:hover,
+  .notary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg) !important;
+  }
+
+  .notary-name,
+  .card-title,
+  .featured-notary h3 {
+    font-weight: 700;
+    color: var(--neutral-900);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  /* Contact button styles */
+  .contact-btn {
+    @apply flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-semibold transition-all duration-200;
+  }
+
+  .contact-btn-call {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+  }
+
+  .contact-btn-email {
+    @apply bg-green-600 text-white hover:bg-green-700;
+  }
+
+  .contact-btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Tag styles */
+  .tag,
+  [class*="mobile-notary"],
+  [class*="24-hour"] {
+    @apply text-sm font-medium px-3 py-1 inline-flex items-center mr-2 mb-2;
+    border: 1px solid rgba(60, 64, 67, 0.2) !important;
+    border-radius: var(--radius-lg) !important;
+    background-color: var(--white);
+  }
+
+  .tag-mobile {
+    @apply bg-primary-light text-primary;
+    border-color: var(--primary) !important;
+  }
+
+  .tag-24hour {
+    @apply bg-accent-light text-accent;
+    border-color: var(--accent) !important;
+  }
+
+  .tag-free {
+    @apply bg-secondary-light text-secondary;
+    border-color: var(--secondary) !important;
+  }
+
+  /* Footer */
+  .footer {
+    @apply bg-white py-8 mt-16;
+    border-top: var(--border-light) !important;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .footer-content {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+
+  .footer-column-title {
+    @apply text-lg font-semibold mb-4;
+  }
+
+  /* Footer specific styles */
+  footer ul {
+    @apply space-y-2;
+  }
+
+  /* Footer description text */
+  footer p {
+    @apply text-gray-400 !important;
+  }
+
+  /* Increase specificity for footer links */
+  footer ul li a,
+  footer ul li a[href="/services"],
+  footer ul li a[href="/about"],
+  footer ul li a[href="/contact"] {
+    @apply text-gray-400 hover:text-white transition-colors !important;
+    display: block !important;
+    padding: 4px 0 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: none !important;
+    font-weight: 400 !important;
+  }
+
+  /* Remove any conflicting header styles */
+  header a[href="/services"],
+  header a[href="/about"],
+  header a[href="/contact"] {
+    color: #111827 !important;
+  }
+
+  footer h2 {
+    @apply text-gray-900 font-semibold mb-4;
+  }
+
+  .footer-bottom {
+    @apply mt-8 pt-4 flex flex-col md:flex-row items-center text-center md:justify-between text-neutral-700 text-sm;
+    border-top: var(--border-light) !important;
+  }
+
+  .footer-bottom-links {
+    @apply flex gap-4 mt-2 md:mt-0;
+  }
+
+  /* Remove borders from header navigation elements */
+  header nav,
+  header .navigation,
+  header .nav-links,
+  header [role="navigation"],
+  header ul,
+  header ol,
+  header div:has(> a[href="/services"]) {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  header a,
+  nav a,
+  .navigation a,
+  .nav-links a,
+  a[href="/services"],
+  a[href="/about"],
+  a[href="/contact"],
+  header [role="navigation"] a {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #111827 !important;
+    text-decoration: none !important;
+    padding: 10px 15px !important;
+  }
+
+  /* Preserve the Notary Sign Up button styles */
+  header a[href="/notary-signup"] {
+    background-color: #4285F4 !important;
+    color: white !important;
+    padding: 16px 32px !important;
+  }
+
+  /* Header navigation specific fixes */
+  header nav .md\:flex a {
+    color: #111827 !important;
+    font-weight: 500 !important;
+    padding: 8px 12px !important;
+    transition: color 0.2s ease !important;
+  }
+
+  header nav .md\:flex a:hover {
+    color: #4B5563 !important;
+  }
+
+  /* Preserve sign up button styles */
+  header nav .md\:flex a[href="/notary-signup"] {
+    background-color: var(--primary) !important;
+    color: white !important;
+    padding: 16px 32px !important;
+    margin-left: 16px !important;
+  }
+
+  /* Remove any unwanted borders from nav containers */
+  header nav,
+  header .md\:flex {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .input-group {
+    @apply relative flex items-center;
+  }
+
+  .input-group .input {
+    @apply pl-10;
+  }
+
+  .input-group .icon {
+    @apply absolute left-3 text-gray-400;
+  }
+
+  .search-bar {
+    @apply flex gap-2 w-full max-w-2xl bg-white rounded-lg shadow-lg p-2;
+  }
+
+  .search-input {
+    @apply flex-1 px-4 py-2 text-sm border-0 focus:outline-none focus:ring-0 rounded-md;
+  }
+
+  .search-button {
+    @apply px-6 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 transition-colors duration-200;
+  }
+
+  /* Claim Your Listing button - specific styles */
+  header nav a[href="/claim-listing"],
+  .nav-links a[href="/claim-listing"],
+  a[href="/claim-listing"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #4285F4 !important;
+    color: white !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.2s ease !important;
+    margin-left: 1.5rem !important;
+  }
+
+  header nav a[href="/claim-listing"]:hover,
+  .nav-links a[href="/claim-listing"]:hover,
+  a[href="/claim-listing"]:hover {
+    background-color: #3b78e7 !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Update navigation link exclusions */
+  .nav-link,
+  .nav-links a:not([href="/claim-listing"]):not([href="/notary-signup"]),
+  header a:not([href="/claim-listing"]):not([href="/notary-signup"]):not(.logo):not(.btn) {
+    color: #111827 !important;
+    font-weight: 500 !important;
+    padding: 0 !important;
+    transition: color 0.2s ease !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+    background: none !important;
+    border: none !important;
+    font-family: var(--font-family) !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Base section styles */
+section {
+  background-color: white;
+}
+
+/* Remove focus outline from SearchSection inputs */
+.SearchSection input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
