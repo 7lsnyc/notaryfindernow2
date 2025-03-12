@@ -1,5 +1,7 @@
 # NotaryFinderNow
 
+![CI/CD](https://github.com/7lsnyc/notaryfindernow2/actions/workflows/ci.yml/badge.svg)
+
 A modern web application to help users find and book notary services in their area. Built with Next.js, TypeScript, Tailwind CSS, and Supabase.
 
 ## Features
